@@ -21,6 +21,8 @@ namespace AaUS2Semka1.BinaryTree
             return false;
         }
 
+        public void 
+
         internal bool Contains(IComparable data)
         {
             return root.Contains(data);
