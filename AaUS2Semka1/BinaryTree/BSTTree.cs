@@ -13,19 +13,33 @@ namespace AaUS2Semka1.BinaryTree
             if (root==null)
             {
                 root = new BSTNode(data);
+
+                return true;
             }
-            else
-            {
-                return root.Insert(data);
-            }
-            return false;
+            return root.Insert(data);
+            
+            
         }
 
-        public void 
+        public void InsertList(IComparable[] data)
+        {
+            //IComparable[] data = new IComparable[] { 0, 2, 3 };
+            foreach (var t in data)
+            {
+                Insert(t);
+            }
+
+            root = root;
+        }
 
         internal bool Contains(IComparable data)
         {
             return root.Contains(data);
+        }
+
+        public string InOrder()
+        {
+            return root.InOrder("");
         }
 
         

@@ -20,30 +20,40 @@ namespace AaUS2Semka1.BinaryTree
 
         public bool Insert(IComparable comparable)
         {
-            if (comparable.CompareTo(data)>=0)
+            if (comparable.CompareTo(data) == 0)
             {
-                leftChild = InsertChild(leftChild,comparable);
-            }
-            else
+                return false;
+            } if (comparable.CompareTo(data)>=0)
             {
-                rightChild = InsertChild(rightChild,comparable);
+                 leftChild = InsertChild(leftChild,comparable);
+                 return true;
             }
-            throw new NotImplementedException();
+            
+            
+            rightChild = InsertChild(rightChild,comparable);
+            return true;
+            
+
+            
+            //throw new NotImplementedException();
         }
 
         
 
         private BSTNode InsertChild(BSTNode node, IComparable data)
         {
-            if (data == null)
+            if (node == null)
             {
-                node = new BSTNode(data);
+                return new BSTNode(data);
+                
             }
             else
             {
                 node.Insert(data);
+                return node;
+
             }
-            return null;
+            
         }
 
 
@@ -59,11 +69,26 @@ namespace AaUS2Semka1.BinaryTree
             return data.ToString();
         }
 
-        public string InOrder(in string input)
+        public string InOrder(string input)
         {
             
+            if (leftChild==null && rightChild==null)
+            {
+                return string.Concat(input, data.ToString()," ");
+            }
+            else if(rightChild==null)
+            {
+                return string.Concat(input, leftChild.InOrder(input), data.ToString(), " ");
+            }
+
+            if (leftChild== null)
+            {
+              return string.Concat(input, data.ToString(),rightChild.ToString(), " ");
+            }
+        
             //output = String.Join("",new String[]{input, leftChild.InOrder(input))};
-            return string.Concat(input,leftChild.InOrder(input), data.ToString());
+            return string.Concat(input,leftChild.InOrder(input), data.ToString(), " ", rightChild.ToString(), " ");
+            //return input + leftChild.InOrder(input) + data.ToString();
         }
 
 
