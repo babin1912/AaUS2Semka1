@@ -10,10 +10,11 @@ namespace AaUS2Semka1
             BSTTree tree = new BSTTree();
             //var peter = new IComparable[]{0, 2, 3};
             tree.InsertList(new IComparable[] { 24, 31,25, 15,50, 18, 10,22,35,70,4,12,44,66,90});
-            Console.WriteLine(tree.InOrder());
+            Console.WriteLine(" " + tree.InOrder());
 
-            var jozef = string.Concat(" ", "ano");
-            Console.WriteLine(jozef);
+            
+            Console.WriteLine(tree.Contains(90));
+            //Console.WriteLine(jozef);
         }
     }
 }

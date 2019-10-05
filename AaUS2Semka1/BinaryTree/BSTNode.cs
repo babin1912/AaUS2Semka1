@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Text;
 
 namespace AaUS2Semka1.BinaryTree
@@ -59,7 +60,27 @@ namespace AaUS2Semka1.BinaryTree
 
         public bool Contains(IComparable comparable)
         {
-            throw new NotImplementedException();
+            if (data.Equals(comparable))
+            {
+                return true;
+            }
+            else if (data.CompareTo(comparable)>=0)
+            {
+                if (leftChild!= null)
+                {
+                    return leftChild.Contains(comparable);
+                }
+                
+            }
+            else
+            {
+                if (rightChild != null)
+                {
+                    return rightChild.Contains(comparable);
+                }
+            }
+
+            return false;
         }
 
 
