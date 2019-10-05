@@ -29,7 +29,7 @@ namespace AaUS2Semka1.BinaryTree
                 Insert(t);
             }
 
-            root = root;
+            
         }
 
         internal bool Contains(IComparable data)
