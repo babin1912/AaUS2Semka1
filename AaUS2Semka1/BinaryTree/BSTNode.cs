@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
+using System.Data.SqlTypes;
 using System.Text;
 
 namespace AaUS2Semka1.BinaryTree
@@ -8,13 +9,13 @@ namespace AaUS2Semka1.BinaryTree
     class BSTNode
 
     {
-        public BSTNode leftChild { get; set; }
+        public BSTNode LeftChild { get; set; }
 
-        public BSTNode rightChild { get; set; }
+        public BSTNode RightChild { get; set; }
 
         public BSTNode(IComparable data)
         {
-            this.data = data;
+            this.Data = data;
         }
 
 
@@ -23,17 +24,17 @@ namespace AaUS2Semka1.BinaryTree
 
         public bool Insert(IComparable comparable)
         {
-            if (comparable.CompareTo(data) == 0)
+            if (comparable.CompareTo(Data) == 0)
             {
                 return false;
-            } if (comparable.CompareTo(data)>=0)
+            } if (comparable.CompareTo(Data)>=0)
             {
-                 leftChild = InsertChild(leftChild,comparable);
+                 LeftChild = InsertChild(LeftChild,comparable);
                  return true;
             }
             
             
-            rightChild = InsertChild(rightChild,comparable);
+            RightChild = InsertChild(RightChild,comparable);
             return true;
             
 
@@ -62,23 +63,23 @@ namespace AaUS2Semka1.BinaryTree
 
         public bool Contains(IComparable comparable)
         {
-            if (data.Equals(comparable))
+            if (Data.Equals(comparable))
             {
                 return true;
             }
-            else if (data.CompareTo(comparable)>=0)
+            else if (Data.CompareTo(comparable)>=0)
             {
-                if (leftChild!= null)
+                if (LeftChild!= null)
                 {
-                    return leftChild.Contains(comparable);
+                    return LeftChild.Contains(comparable);
                 }
                 
             }
             else
             {
-                if (rightChild != null)
+                if (RightChild != null)
                 {
-                    return rightChild.Contains(comparable);
+                    return RightChild.Contains(comparable);
                 }
             }
 
@@ -89,55 +90,44 @@ namespace AaUS2Semka1.BinaryTree
 
         public override string ToString()
         {
-            return data.ToString();
+            return Data.ToString();
         }
 
         public string InOrder(string input)
         {
             
-            if (leftChild==null && rightChild==null)
+            if (LeftChild==null && RightChild==null)
             {
-                return string.Concat(input, data.ToString()," ");
+                return string.Concat(input, Data.ToString()," ");
             }
-            else if(rightChild==null)
+            else if(RightChild==null)
             {
-                return string.Concat(input, leftChild.InOrder(input), data.ToString(), " ");
+                return string.Concat(input, LeftChild.InOrder(input), Data.ToString(), " ");
             }
 
-            if (leftChild== null)
+            if (LeftChild== null)
             {
-              return string.Concat(input, data.ToString(),rightChild.ToString(), " ");
+              return string.Concat(input, Data.ToString(),RightChild.ToString(), " ");
             }
         
-            //output = String.Join("",new String[]{input, leftChild.InOrder(input))};
-            return string.Concat(input,leftChild.InOrder(input), data.ToString(), " ", rightChild.ToString(), " ");
-            //return input + leftChild.InOrder(input) + data.ToString();
+            //output = String.Join("",new String[]{input, LeftChild.InOrder(input))};
+            return string.Concat(input,LeftChild.InOrder(input), Data.ToString(), " ", RightChild.ToString(), " ");
+            //return input + LeftChild.InOrder(input) + Data.ToString();
         }
 
         public bool HasLeftChild()
         {
-            if (leftChild!=null)
-            {
-                return true;
-            }
-
-            return false;
+            return LeftChild!=null;
         }
 
         public bool HasRightChild()
         {
-            if (rightChild!=null)
-            {
-                return true;
-            }
-
-            return false;
+            return RightChild!=null;
         }
 
-        public IComparable data { get; private set; }
-
-        
+        public IComparable Data { get; private set; }
 
 
+        public bool IsNull { get; }
     }
 }
