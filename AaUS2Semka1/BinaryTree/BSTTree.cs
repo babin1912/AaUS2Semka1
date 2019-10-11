@@ -10,7 +10,7 @@ namespace AaUS2Semka1.BinaryTree
     {
         private BSTNode root;
 
-        internal bool Insert(IComparable data)
+        internal bool InsertRecursive(IComparable data)
         {
             if (root==null)
             {
@@ -23,15 +23,84 @@ namespace AaUS2Semka1.BinaryTree
             
         }
 
+        internal bool Insert(IComparable data)
+        {
+            if (root == null)
+            {
+                root = new BSTNode(data);
+            }
+
+            if (Equals(root.Data, data))
+            {
+                return false;
+            }
+            
+
+            BSTNode node = root;
+            //BSTNode refer = new BSTNode(root.LeftChild,node.RightChild,root.Data);
+            bool work = true;
+            do
+            {
+                if (node.Data.CompareTo(data)==0)
+                {
+                    return false;
+                }
+                if (node.Data.CompareTo(data) > 0)
+                {
+                    if (node.HasLeftChild())
+                    {
+                        node = node.LeftChild;
+                    }
+                    else
+                    {
+                        node.LeftChild = new BSTNode(data);
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (node.HasRightChild())
+                    {
+                        node = node.RightChild;
+                    }
+                    else
+                    {
+                        node.RightChild = new BSTNode(data);
+                        
+                        return true;
+                    }
+                }
+
+
+            } while (work);
+
+            return false;
+        }
+
         public void InsertList(IComparable[] data)
         {
             //IComparable[] Data = new IComparable[] { 0, 2, 3 };
+            
+
             foreach (var t in data)
             {
                 Insert(t);
             }
 
+
+        }
+
+        public void InsertRecursiveList(IComparable[] data)
+        {
+            //IComparable[] Data = new IComparable[] { 0, 2, 3 };
+            foreach (var t in data)
+            {
+                InsertRecursive(t);
+            }
+
             
+
+
         }
 
         internal bool Contains(IComparable data)
@@ -74,7 +143,7 @@ namespace AaUS2Semka1.BinaryTree
                         else
                         {
                             
-                            Console.Write("|".PadLeft(((((int)Math.Pow((double)2.0, (double)i - 2)) * 6)), ' '));
+                            Console.Write("|".PadLeft(((((int)Math.Pow((double)2.0, (double)i - 1)) * 6)-6), ' '));
                             //Console.Write((int)Math.Pow((double)2.0, (double)i - 2) * 6);
 
                         }

@@ -9,6 +9,13 @@ namespace AaUS2Semka1.BinaryTree
     class BSTNode
 
     {
+        public BSTNode(BSTNode leftChild, BSTNode rightChild, IComparable data)
+        {
+            LeftChild = leftChild;
+            RightChild = rightChild;
+            Data = data;
+        }
+
         public BSTNode LeftChild { get; set; }
 
         public BSTNode RightChild { get; set; }
