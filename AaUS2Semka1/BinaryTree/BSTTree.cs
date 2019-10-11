@@ -52,9 +52,9 @@ namespace AaUS2Semka1.BinaryTree
             do
             {
                 node = null;
-                foreach (var leverNode in level)
+                foreach (BSTNode nodeL in level)
                 {
-                    if (leverNode)
+                    if (true)
                     {
                         
                     }

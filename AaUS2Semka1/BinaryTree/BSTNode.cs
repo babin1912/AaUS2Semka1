@@ -8,7 +8,9 @@ namespace AaUS2Semka1.BinaryTree
     class BSTNode
 
     {
-       
+        public BSTNode leftChild { get; set; }
+
+        public BSTNode rightChild { get; set; }
 
         public BSTNode(IComparable data)
         {
@@ -112,12 +114,29 @@ namespace AaUS2Semka1.BinaryTree
             //return input + leftChild.InOrder(input) + data.ToString();
         }
 
+        public bool HasLeftChild()
+        {
+            if (leftChild!=null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool HasRightChild()
+        {
+            if (rightChild!=null)
+            {
+                return true;
+            }
+
+            return false;
+        }
 
         public IComparable data { get; private set; }
 
-        public BSTNode leftChild { get; set; }
-
-        public BSTNode rightChild { get; set; }
+        
 
 
     }
