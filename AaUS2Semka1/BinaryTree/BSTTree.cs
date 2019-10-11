@@ -97,29 +97,44 @@ namespace AaUS2Semka1.BinaryTree
 
                 foreach (object node in product[product.Count - 1])
                 {
-                    if (((BSTNode)node).HasLeftChild())
+                    if (node!=null)
                     {
-                        level.Add(((BSTNode)node).LeftChild );
-                        work = true;
+                        if (((BSTNode)node).HasLeftChild())
+                        {
+                            level.Add(((BSTNode)node).LeftChild );
+                            work = true;
+                        }
+                        else
+                        {
+                            level.Add(null);
+                        }
+
+                        if (((BSTNode)node).HasRightChild())
+                        {
+                            level.Add(((BSTNode)node).RightChild);
+                            work = true;
+                        }
+                        else
+                        {
+                            level.Add(null);
+                        }
+                    
                     }
                     else
                     {
+                        level.Add(null);
                         level.Add(null);
                     }
 
-                    if (((BSTNode)node).HasRightChild())
-                    {
-                        level.Add(((BSTNode)node).RightChild);
-                        work = true;
-                    }
-                    else
-                    {
-                        level.Add(null);
-                    }
+                }
+
+                if (work)
+                {
                     product.Add(level);
-                    level = new List<object>();
                 }
                 
+                level = new List<object>();
+
 
             } while (work);
 

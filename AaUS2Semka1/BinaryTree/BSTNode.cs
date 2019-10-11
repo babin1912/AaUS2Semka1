@@ -27,7 +27,7 @@ namespace AaUS2Semka1.BinaryTree
             if (comparable.CompareTo(Data) == 0)
             {
                 return false;
-            } if (comparable.CompareTo(Data)>=0)
+            } if (comparable.CompareTo(Data)<=0)
             {
                  LeftChild = InsertChild(LeftChild,comparable);
                  return true;
