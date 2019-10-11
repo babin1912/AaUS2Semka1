@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace AaUS2Semka1.BinaryTree
@@ -42,6 +43,29 @@ namespace AaUS2Semka1.BinaryTree
             return root.InOrder("");
         }
 
-        
+        public string ToStringAF()
+        {
+            BSTNode node = null;
+            var level = new List<BSTNode>();
+            level.Add(root);
+            
+            do
+            {
+                node = null;
+                foreach (var leverNode in level)
+                {
+                    if (leverNode)
+                    {
+                        
+                    }
+                }
+
+
+
+            } while (node != null);
+            return "";
+        }
+
+
     }
 }
