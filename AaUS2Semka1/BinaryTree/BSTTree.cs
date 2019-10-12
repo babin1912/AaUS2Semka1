@@ -24,9 +24,10 @@ namespace AaUS2Semka1.BinaryTree
         }
 
         internal bool Insert(IComparable data)
-        {
+        { 
             if (root == null)
             {
+                
                 root = new BSTNode(data);
             }
 
