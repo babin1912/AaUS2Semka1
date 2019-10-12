@@ -200,21 +200,16 @@ namespace AaUS2Semka1.BinaryTree
                     }
                     //Parent.LeftChild = LeftChild;
                 }
-                BSTNode lssRs = null;// = new BSTNode(node.RightChild.LeftChild);
-                if (node.RightChild.LeftChild != null)
-                {
-                    lssRs = new BSTNode(node.RightChild.LeftChild);
-                    node.RightChild.LeftChild = node;
-                }
-                
+                BSTNode lssRs = node.RightChild.LeftChild != null ? new BSTNode(node.RightChild.LeftChild) : null;
+                node.RightChild.LeftChild = node;
+
                 //this = LeftChild;
 
                 if (node.Parent == null)
                 {
                     root = node.RightChild;
                 }
-                if (node.RightChild.LeftChild != null)
-                    node.RightChild = lssRs;
+                node.RightChild = lssRs;
 
 
             }
