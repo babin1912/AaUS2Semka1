@@ -14,7 +14,7 @@ namespace AaUS2Semka1.BinaryTree
         {
             if (root==null)
             {
-                root = new BSTNode(data);
+                root = new BSTNode(data,null);
 
                 return true;
             }
@@ -28,7 +28,7 @@ namespace AaUS2Semka1.BinaryTree
             if (root == null)
             {
                 
-                root = new BSTNode(data);
+                root = new BSTNode(data,null);
             }
 
             if (Equals(root.Data, data))
@@ -54,7 +54,7 @@ namespace AaUS2Semka1.BinaryTree
                     }
                     else
                     {
-                        node.LeftChild = new BSTNode(data);
+                        node.LeftChild = new BSTNode(data,node);
                         return true;
                     }
                 }
@@ -66,7 +66,7 @@ namespace AaUS2Semka1.BinaryTree
                     }
                     else
                     {
-                        node.RightChild = new BSTNode(data);
+                        node.RightChild = new BSTNode(data,node);
                         
                         return true;
                     }
@@ -78,6 +78,7 @@ namespace AaUS2Semka1.BinaryTree
             return false;
         }
 
+        
         public void InsertList(IComparable[] data)
         {
             //IComparable[] Data = new IComparable[] { 0, 2, 3 };
@@ -102,6 +103,117 @@ namespace AaUS2Semka1.BinaryTree
             
 
 
+        }
+
+        public BSTNode Find(IComparable data)
+        {
+            return root.Find(data);
+        }
+
+        public bool RightRotation(IComparable data)
+        {
+            BSTNode node = Find(data);
+            //BSTNode node1 = null;
+            if (node!=null)
+            {
+                if (node.LeftChild == null)
+                {
+                    return false;
+                }
+
+                if (node.Parent == null)
+                {
+
+                    node.LeftChild.Parent = null;
+                    //node1 = node.LeftChild;
+
+                }
+                else
+                {
+                    node.LeftChild.Parent = node.Parent;
+                    node.Parent.LeftChild = node.LeftChild;
+                    //Parent.LeftChild = LeftChild;
+                }
+
+
+                BSTNode lssRs = new BSTNode(node.LeftChild.RightChild);
+                node.LeftChild.RightChild = node;
+                //this = LeftChild;
+                
+                if (node.Parent == null)
+                {
+                    root = node.LeftChild;
+                }
+                node.LeftChild = lssRs;
+                
+
+            }
+            else
+            {
+                return false;
+            }
+            /*if (node!=null)
+            {
+                node.RightRotation();
+                return true;
+            }*/
+            
+            return true;
+        }
+
+        public bool LeftRotation(IComparable data)
+        {
+            BSTNode node = Find(data);
+            //BSTNode node1 = null;
+            if (node != null)
+            {
+                if (node.RightChild == null)
+                {
+                    return false;
+                }
+
+                if (node.Parent == null)
+                {
+
+                    node.RightChild.Parent = null;
+                    //node1 = node.LeftChild;
+
+                }
+                else
+                {
+                    node.RightChild.Parent = node.Parent;
+                    node.Parent.RightChild = node.RightChild;
+                    //Parent.LeftChild = LeftChild;
+                }
+                BSTNode lssRs = null;// = new BSTNode(node.RightChild.LeftChild);
+                if (node.RightChild.LeftChild != null)
+                {
+                    lssRs = new BSTNode(node.RightChild.LeftChild);
+                    node.RightChild.LeftChild = node;
+                }
+                
+                //this = LeftChild;
+
+                if (node.Parent == null)
+                {
+                    root = node.RightChild;
+                }
+                if (node.RightChild.LeftChild != null)
+                    node.RightChild = lssRs;
+
+
+            }
+            else
+            {
+                return false;
+            }
+            /*if (node!=null)
+            {
+                node.RightRotation();
+                return true;
+            }*/
+
+            return true;
         }
 
         internal bool Contains(IComparable data)

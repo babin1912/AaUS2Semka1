@@ -12,18 +12,26 @@ namespace AaUS2Semka1
             //var peter = new IComparable[]{0, 2, 3};
             //tree.InsertList(new IComparable[] { 3, 9, 20, 15, 7 });
 
-            tree.InsertRecursiveList(new IComparable[] { 24, 31,25, 15,50, 18, 10,22,35,70,4,12,44,66,90,91});
+            //tree.InsertRecursiveList(new IComparable[] { 24, 31,25, 15,50, 18, 10,22,35,70,4,12,44,66,90,91});
             //Console.WriteLine(" " + tree.InOrder());
 
-            
-            treeR.InsertList(new IComparable[] { 24, 31, 25, 15, 50, 18, 10, 22, 35, 70, 4, 12, 44, 66, 90, 91 });
+
+            //treeR.InsertList(new IComparable[] { 24, 31, 25, 15, 50, 18, 10, 22, 35, 70, 4, 12, 44, 66, 90, 91 });
             //Console.WriteLine(" " + treeR.InOrder());
 
 
+           
+            //treeR.ToStringAF();
+
+            tree.InsertRecursiveList(new IComparable[] {41,35,40,25,30,15,20,10 });
             tree.ToStringAF();
-            treeR.ToStringAF();
+            tree.RightRotation(35);
+            tree.RightRotation(15);
+
+            tree.ToStringAF();
 
             Console.WriteLine(tree.Contains(90));
+
             //Console.WriteLine(jozef);
         }
     }

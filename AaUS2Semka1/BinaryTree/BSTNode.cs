@@ -9,8 +9,21 @@ namespace AaUS2Semka1.BinaryTree
     class BSTNode
 
     {
-        public BSTNode(BSTNode leftChild, BSTNode rightChild, IComparable data)
+        public BSTNode Parent { get; set; }
+
+        public BSTNode(BSTNode node)
         {
+            
+
+            Parent = node.Parent;
+            LeftChild = node.LeftChild;
+            RightChild = node.RightChild;
+            Data = node.Data;
+        }
+
+        public BSTNode(BSTNode leftChild, BSTNode rightChild, IComparable data, BSTNode parent)
+        {
+            Parent = parent;
             LeftChild = leftChild;
             RightChild = rightChild;
             Data = data;
@@ -20,10 +33,56 @@ namespace AaUS2Semka1.BinaryTree
 
         public BSTNode RightChild { get; set; }
 
-        public BSTNode(IComparable data)
+        public BSTNode(IComparable data, BSTNode parent)
         {
+            Parent = parent;
             this.Data = data;
         }
+
+
+        public void LeftRotation()
+        {
+            //BSTNode 
+        }
+
+        public bool RightRotation()
+        {
+            
+            /*if (Parent!=null)
+            {
+                LeftChild.Parent = Parent;
+                Parent.LeftChild = LeftChild;
+            }
+            else
+            {
+                LeftChild.Parent = null;
+                //Parent.LeftChild = LeftChild;
+            }
+
+            if (expr)
+            {
+                
+            }*/
+            /*LeftChild.RightChild = this;
+            LeftChild = LeftChild.RightChild;
+
+            LeftChild = LssRs;*/
+            //LeftChild.Parent = this;
+            
+
+            
+            /*if (LeftChild.RightChild!=null)
+            {
+                LssRs = LeftChild.RightChild;
+                //LeftChild = LeftChild.RightChild;
+            }*/
+
+
+            return false;
+
+        }
+
+
 
 
         
@@ -55,7 +114,7 @@ namespace AaUS2Semka1.BinaryTree
         {
             if (node == null)
             {
-                return new BSTNode(data);
+                return new BSTNode(data, this);
                 
             }
             else
@@ -136,5 +195,30 @@ namespace AaUS2Semka1.BinaryTree
 
 
         public bool IsNull { get; }
+
+        public BSTNode Find(IComparable comparable)
+        {
+            if (Data.Equals(comparable))
+            {
+                return this;
+            }
+            else if (Data.CompareTo(comparable) >= 0)
+            {
+                if (LeftChild != null)
+                {
+                    return LeftChild.Find(comparable);
+                }
+
+            }
+            else
+            {
+                if (RightChild != null)
+                {
+                    return RightChild.Find(comparable);
+                }
+            }
+
+            return null;
+        }
     }
 }
