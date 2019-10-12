@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
@@ -131,12 +132,19 @@ namespace AaUS2Semka1.BinaryTree
                 else
                 {
                     node.LeftChild.Parent = node.Parent;
-                    node.Parent.LeftChild = node.LeftChild;
+                    if (node.Parent.LeftChild.Equals(node))
+                    {
+                        node.Parent.LeftChild = node.LeftChild;
+                    }
+                    else
+                    {
+                        node.Parent.RightChild = node.LeftChild;
+                    }
                     //Parent.LeftChild = LeftChild;
                 }
 
-
-                BSTNode lssRs = new BSTNode(node.LeftChild.RightChild);
+                
+                BSTNode lssRs = node.LeftChild.RightChild!=null? new BSTNode(node.LeftChild.RightChild):null;
                 node.LeftChild.RightChild = node;
                 //this = LeftChild;
                 
@@ -182,7 +190,14 @@ namespace AaUS2Semka1.BinaryTree
                 else
                 {
                     node.RightChild.Parent = node.Parent;
-                    node.Parent.RightChild = node.RightChild;
+                    if (node.Parent.RightChild.Equals(node))
+                    {
+                        node.Parent.RightChild = node.RightChild;
+                    }
+                    else
+                    {
+                        node.Parent.LeftChild = node.RightChild;
+                    }
                     //Parent.LeftChild = LeftChild;
                 }
                 BSTNode lssRs = null;// = new BSTNode(node.RightChild.LeftChild);

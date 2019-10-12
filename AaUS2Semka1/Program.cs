@@ -23,10 +23,13 @@ namespace AaUS2Semka1
            
             //treeR.ToStringAF();
 
-            tree.InsertRecursiveList(new IComparable[] {41,35,40,25,30,15,20,10 });
+            //tree.InsertRecursiveList(new IComparable[] {41,35,40,25,30,15,20,10 });
+            tree.InsertRecursiveList(new IComparable[] {15,10,35,25,20,30,40});
             tree.ToStringAF();
             tree.RightRotation(35);
-            tree.RightRotation(15);
+            tree.ToStringAF();
+
+            tree.LeftRotation(15);
 
             tree.ToStringAF();
 
