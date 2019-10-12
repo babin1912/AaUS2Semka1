@@ -13,14 +13,21 @@ namespace AaUS2Semka1.BinaryTree
 
         public BSTNode(BSTNode node)
         {
-            
-
             Parent = node.Parent;
             LeftChild = node.LeftChild;
             RightChild = node.RightChild;
             Data = node.Data;
         }
 
+        public void setAtributes(BSTNode node)
+        {
+            Parent = node.Parent;
+            LeftChild = node.LeftChild;
+            
+            Data = node.Data;
+            RightChild = node.RightChild;
+
+        }
         public BSTNode(BSTNode leftChild, BSTNode rightChild, IComparable data, BSTNode parent)
         {
             Parent = parent;
@@ -40,43 +47,60 @@ namespace AaUS2Semka1.BinaryTree
         }
 
 
-        public void LeftRotation()
+        public bool LeftRotation()
         {
-            //BSTNode 
+            if (RightChild == null)
+            {
+                return false;
+            }
+
+            if (Parent == null)
+            {
+
+                Parent = new BSTNode(0, null) {RightChild = this};
+
+
+                //node1 = node.LeftChild;
+
+            }
+            else
+            {
+                RightChild.Parent = Parent;
+            }
+            
+            {
+                //RightChild.Parent = Parent;
+                if (Parent.RightChild.Equals(this))
+                {
+                    Parent.RightChild = RightChild;
+                }
+                else
+                {
+                    Parent.LeftChild = RightChild;
+                }
+                //Parent.LeftChild = LeftChild;
+            }
+            BSTNode lssRs = RightChild.LeftChild != null ? new BSTNode(RightChild.LeftChild) : null;
+            RightChild.LeftChild = this;
+
+            //this = LeftChild;
+
+            if (Parent == null)
+            {
+                //Parent = new BSTNode(0,null);
+                //Parent.RightChild = RightChild;
+                //LeftChild.RightChild = RightChild;
+                //setAtributes(RightChild);
+                //RightChild.Parent = null;
+            }
+            RightChild = lssRs;
+
+
+            return true;
         }
 
         public bool RightRotation()
         {
-            
-            /*if (Parent!=null)
-            {
-                LeftChild.Parent = Parent;
-                Parent.LeftChild = LeftChild;
-            }
-            else
-            {
-                LeftChild.Parent = null;
-                //Parent.LeftChild = LeftChild;
-            }
-
-            if (expr)
-            {
-                
-            }*/
-            /*LeftChild.RightChild = this;
-            LeftChild = LeftChild.RightChild;
-
-            LeftChild = LssRs;*/
-            //LeftChild.Parent = this;
-            
-
-            
-            /*if (LeftChild.RightChild!=null)
-            {
-                LssRs = LeftChild.RightChild;
-                //LeftChild = LeftChild.RightChild;
-            }*/
-
 
             return false;
 
@@ -202,7 +226,7 @@ namespace AaUS2Semka1.BinaryTree
             {
                 return this;
             }
-            else if (Data.CompareTo(comparable) >= 0)
+            if (Data.CompareTo(comparable) >= 0)
             {
                 if (LeftChild != null)
                 {
