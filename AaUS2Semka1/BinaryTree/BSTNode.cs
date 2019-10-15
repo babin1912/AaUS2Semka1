@@ -220,6 +220,27 @@ namespace AaUS2Semka1.BinaryTree
 
         public bool IsNull { get; }
 
+        public bool HasNoChild() {
+            if (!HasRightChild() && !HasLeftChild())
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool RemoveChild(IComparable data) {
+            if (LeftChild.Data.CompareTo(data)==0) {
+                LeftChild = null;
+                return true;
+            }
+            else if (RightChild.Data.CompareTo(data)==0)
+            {
+                RightChild = null;
+                return true;
+            }
+            return false;
+        }
+
         public BSTNode Find(IComparable comparable)
         {
             if (Data.Equals(comparable))

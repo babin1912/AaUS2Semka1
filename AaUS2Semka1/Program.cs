@@ -29,11 +29,12 @@ namespace AaUS2Semka1
             //tree.RightRotation(35);
             //tree.ToStringAF();
 
-            tree.Splay(25);
+            //tree.Splay(25);
 
+            //tree.ToStringAF();
+            tree.delete(20);
             tree.ToStringAF();
-
-            Console.WriteLine(tree.Contains(90));
+            //Console.WriteLine(tree.Contains(90));
 
             //Console.WriteLine(jozef);
         }

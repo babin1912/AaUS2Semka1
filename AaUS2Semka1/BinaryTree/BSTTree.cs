@@ -93,6 +93,22 @@ namespace AaUS2Semka1.BinaryTree
 
         }
 
+        public bool delete(IComparable data) {
+            BSTNode node = Find(data);
+            if (node == null)
+            {
+                return false;
+            }
+            else if (node.HasNoChild())
+            {
+                return node.Parent.RemoveChild(data);
+
+            }
+            else { 
+                  
+            }
+            return true; 
+        }
         public void InsertRecursiveList(IComparable[] data)
         {
             //IComparable[] Data = new IComparable[] { 0, 2, 3 };
