@@ -26,14 +26,21 @@ namespace AaUS2Semka1
             //tree.InsertRecursiveList(new IComparable[] {41,35,40,25,30,15,20,10 });
             tree.InsertRecursiveList(new IComparable[] {15,10,35,25,20,30,40});
             tree.ToStringAF();
-            //tree.RightRotation(35);
-            //tree.ToStringAF();
+            //tree.RightRotation(35)
+            Console.WriteLine("ROOT" + tree.Root.HasGrandChild());
+            Console.WriteLine("Leftson" + tree.Root.LeftChild.HasGrandChild());
+            Console.WriteLine("R son" + tree.Root.RightChild.HasGrandChild());
 
-            //tree.Splay(25);
 
-            //tree.ToStringAF();
-            tree.delete(20);
+            tree.Splay(25);
+            Console.WriteLine("ROOT" + tree.Root.HasGrandChild());
+            Console.WriteLine("Leftson" + tree.Root.LeftChild.HasGrandChild());
+            Console.WriteLine("Rtson" + tree.Root.RightChild.HasGrandChild());
+
+
             tree.ToStringAF();
+            //tree.delete(20);
+            //tree.ToStringAF();
             //Console.WriteLine(tree.Contains(90));
 
             //Console.WriteLine(jozef);

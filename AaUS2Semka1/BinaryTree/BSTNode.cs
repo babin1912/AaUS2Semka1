@@ -106,11 +106,14 @@ namespace AaUS2Semka1.BinaryTree
 
         }
 
-
-
-
-        
-
+        internal bool HasGrandChild()
+        {
+            if ((LeftChild !=null&&!LeftChild.HasNoChild())||(RightChild !=null &&!RightChild.HasNoChild()))
+            {
+                return true;
+            };
+            return false;
+        }
 
         public bool Insert(IComparable comparable)
         {

@@ -9,37 +9,37 @@ namespace AaUS2Semka1.BinaryTree
 {
     class BSTTree
     {
-        private BSTNode root;
+        public BSTNode Root { get; set; }
 
         internal bool InsertRecursive(IComparable data)
         {
-            if (root==null)
+            if (Root==null)
             {
-                root = new BSTNode(data,null);
+                Root = new BSTNode(data,null);
 
                 return true;
             }
-            return root.Insert(data);
+            return Root.Insert(data);
             
             
         }
 
         internal bool Insert(IComparable data)
         { 
-            if (root == null)
+            if (Root == null)
             {
                 
-                root = new BSTNode(data,null);
+                Root = new BSTNode(data,null);
             }
 
-            if (Equals(root.Data, data))
+            if (Equals(Root.Data, data))
             {
                 return false;
             }
             
 
-            BSTNode node = root;
-            //BSTNode refer = new BSTNode(root.LeftChild,node.RightChild,root.Data);
+            BSTNode node = Root;
+            //BSTNode refer = new BSTNode(Root.LeftChild,node.RightChild,Root.Data);
             bool work = true;
             do
             {
@@ -94,7 +94,7 @@ namespace AaUS2Semka1.BinaryTree
         }
 
         public bool delete(IComparable data) {
-            BSTNode node = Find(data);
+            BSTNode node = FindRecursive(data);
             if (node == null)
             {
                 return false;
@@ -104,7 +104,8 @@ namespace AaUS2Semka1.BinaryTree
                 return node.Parent.RemoveChild(data);
 
             }
-            else { 
+            else if(node.HasGrandChild()) {
+
                   
             }
             return true; 
@@ -122,9 +123,92 @@ namespace AaUS2Semka1.BinaryTree
 
         }
 
-        public BSTNode Find(IComparable data)
+        public BSTNode FindRecursive(IComparable data)
         {
-            return root.Find(data);
+            return Root.Find(data);
+        }
+
+        
+
+        public BSTNode Find(IComparable data){
+            var node = Root;
+            var inProcess = true;
+            do{
+                switch (data.CompareTo(node.Data))
+	            {
+                    case 0:
+
+                        return node;
+                            //break;
+                        
+                    case 1:
+                        
+                            if (node.HasRightChild())
+	                        {
+                                node = node.RightChild;
+	                        } else {
+                                inProcess = false;
+                            }
+                            break;
+                        
+                    case -1: {
+                        {
+                            if (node.HasLeftChild())
+	                        {
+                                node = node.LeftChild;
+	                        } else {
+                                inProcess = false;
+                            }
+                        }
+                            break;
+                    }
+		            default: return null;
+	            }
+            }while(inProcess);
+	
+            
+            return null;
+        }
+
+
+        public bool Splay(IComparable data)
+        {
+            if (data == Root.Data) {
+                return false;
+            }
+            //BSTNode node = FindRecursive(data);
+            //Console.WriteLine(node);
+            var node = Find(data);
+            //Console.WriteLine(node);
+
+
+            //BSTNode node1 = null;
+            if (node != null)
+            {
+                if (node.Parent.Equals(Root))
+                {
+                    RightRotation(node.Parent);
+                }
+                else if (node.Parent.Parent.RightChild != null && node.Parent.Equals(node.Parent.Parent.RightChild))
+                {
+                    RightRotation(node.Parent);
+                    //ToStringAF();
+                    LeftRotation(node.Parent);
+                }
+                else if (node.Parent.Parent.LeftChild != null && node.Parent.Equals(node.Parent.Parent.LeftChild))
+                {
+                    RightRotation(node.Parent.Parent);
+                    RightRotation(node.Parent);
+                }
+
+
+
+
+
+            }
+
+            return false;
+
         }
 
         public bool RightRotation(BSTNode node)
@@ -163,7 +247,7 @@ namespace AaUS2Semka1.BinaryTree
             
             if (node.Parent == null)
             {
-                root = node.LeftChild;
+                Root = node.LeftChild;
             }
             node.LeftChild = lssRs;
                 
@@ -173,35 +257,7 @@ namespace AaUS2Semka1.BinaryTree
             return true;
         }
 
-        public bool Splay(IComparable data)
-        {
-            BSTNode node = Find(data);
-            //BSTNode node1 = null;
-            if (node != null)
-            {
-                if (node.Parent.Equals(root))
-                {
-                    RightRotation(node.Parent);
-                }else if (node.Parent.Parent.RightChild != null && node.Parent.Equals(node.Parent.Parent.RightChild))
-                {
-                    RightRotation(node.Parent);
-                    //ToStringAF();
-                    LeftRotation(node.Parent);
-                } else if (node.Parent.Parent.LeftChild != null && node.Parent.Equals(node.Parent.Parent.LeftChild))
-                {
-                    RightRotation(node.Parent.Parent);
-                    RightRotation(node.Parent);
-                }
-
-                
-                
-
-
-            }
-
-            return false;
-            
-        }
+        
 
         private bool LeftRotation(BSTNode node)
         {
@@ -237,7 +293,7 @@ namespace AaUS2Semka1.BinaryTree
 
             if (node.Parent == null)
             {
-                root = node.RightChild;
+                Root = node.RightChild;
             }
             node.RightChild = lssRs;
 
@@ -246,13 +302,15 @@ namespace AaUS2Semka1.BinaryTree
 
         internal bool Contains(IComparable data)
         {
-            return root.Contains(data);
+            return Root.Contains(data);
         }
 
-        public string InOrder()
+        public string InOrderRecursive()
         {
-            return root.InOrder("");
+            return Root.InOrder("");
         }
+
+        
 
         public void ToStringAF()
         {
@@ -330,11 +388,11 @@ namespace AaUS2Semka1.BinaryTree
         {
             List<List<object>> product = new List<List<object>>();
             List<object> level = new List<object>();
-            //level.Add(root);
+            //level.Add(Root);
             product.Add(new List<object>());
-            product[0].Add(root);
+            product[0].Add(Root);
             bool work;
-            //Console.WriteLine(root.ToString().PadLeft(2, '0'));
+            //Console.WriteLine(Root.ToString().PadLeft(2, '0'));
             do
             {
                 work = false;
