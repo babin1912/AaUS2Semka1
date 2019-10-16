@@ -30,6 +30,7 @@ namespace AaUS2Semka1
             Console.WriteLine("ROOT" + tree.Root.HasGrandChild());
             Console.WriteLine("Leftson" + tree.Root.LeftChild.HasGrandChild());
             Console.WriteLine("R son" + tree.Root.RightChild.HasGrandChild());
+            
 
 
             tree.Splay(25);
