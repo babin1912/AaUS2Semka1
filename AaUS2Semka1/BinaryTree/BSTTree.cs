@@ -11,20 +11,9 @@ namespace AaUS2Semka1.BinaryTree
     {
         public BSTNode Root { get; set; }
 
-        internal bool InsertRecursive(IComparable data)
-        {
-            if (Root==null)
-            {
-                Root = new BSTNode(data,null);
+        
 
-                return true;
-            }
-            return Root.Insert(data);
-            
-            
-        }
-
-        internal bool Insert(IComparable data)
+        internal BSTNode Insert(IComparable data)
         { 
             if (Root == null)
             {
@@ -34,7 +23,7 @@ namespace AaUS2Semka1.BinaryTree
 
             if (Equals(Root.Data, data))
             {
-                return false;
+                return null;
             }
             
 
@@ -45,7 +34,7 @@ namespace AaUS2Semka1.BinaryTree
             {
                 if (node.Data.CompareTo(data)==0)
                 {
-                    return false;
+                    return null;
                 }
                 if (node.Data.CompareTo(data) > 0)
                 {
@@ -56,7 +45,7 @@ namespace AaUS2Semka1.BinaryTree
                     else
                     {
                         node.LeftChild = new BSTNode(data,node);
-                        return true;
+                        return node.LeftChild;
                     }
                 }
                 else
@@ -69,14 +58,14 @@ namespace AaUS2Semka1.BinaryTree
                     {
                         node.RightChild = new BSTNode(data,node);
                         
-                        return true;
+                        return node.RightChild;
                     }
                 }
 
 
             } while (work);
 
-            return false;
+            return null;
         }
 
         
@@ -93,11 +82,11 @@ namespace AaUS2Semka1.BinaryTree
 
         }
 
-        public bool Delete(IComparable data) {
-            BSTNode node = FindRecursive(data);
+        public BSTNode Delete(IComparable data) {
+            BSTNode node = Find(data);
             if (node == null)
             {
-                return false;
+                return null;
             }
 
             if (node.HasNoChild())
@@ -105,12 +94,12 @@ namespace AaUS2Semka1.BinaryTree
                 if (node.Parent.LeftChild != null && node.Parent.LeftChild.Equals(node))
                 {
                     node.Parent.LeftChild = null;
-                    node.Parent = null;
+                    //node.Parent = null;
                 }
                 else
                 {
                     node.Parent.LeftChild = null;
-                    node.Parent = null;
+                    //node.Parent = null;
                 }
             }
             else if (node.HasOnly1Child())
@@ -119,13 +108,13 @@ namespace AaUS2Semka1.BinaryTree
                 {
                     node.Parent.LeftChild = node.HasRightChild() ? node.RightChild : node.LeftChild;
                     node.Parent.LeftChild.Parent = node.Parent;
-                    node.Parent = null;
+                    //node.Parent = null;
                 }
                 else
                 {
                     node.Parent.RightChild = !node.HasRightChild() ? node.RightChild : node.LeftChild;
                     node.Parent.RightChild.Parent = node.Parent;
-                    node.Parent = null;
+                    //node.Parent = null;
                 }
             }
             else if(node.Has2Children()) {
@@ -136,10 +125,12 @@ namespace AaUS2Semka1.BinaryTree
                     if (!Root.RightChild.Equals(n))
                     {
                         n.Parent.LeftChild = null;
+                        node.Parent = n.Parent;
                     }
                     else
                     {
                         Root.RightChild = null;
+                        node.Parent = n.Parent;
                     }
 
                     /*Root.Parent.LeftChild = null;
@@ -153,10 +144,12 @@ namespace AaUS2Semka1.BinaryTree
                     if (!node.RightChild.Equals(n))
                     {
                         n.Parent.LeftChild = null;
+                        node.Parent = n.Parent;
                     }
                     else
                     {
                         node.RightChild = null;
+                        node.Parent = n.Parent;
                     }
                     //n.Parent.LeftChild = null;
                     /*node.Parent.LeftChild = node.InOrderSuccessor();
@@ -177,27 +170,9 @@ namespace AaUS2Semka1.BinaryTree
                 }*/
 
             }
-            return true; 
-        }
-        public void InsertRecursiveList(IComparable[] data)
-        {
-            //IComparable[] Data = new IComparable[] { 0, 2, 3 };
-            foreach (var t in data)
-            {
-                InsertRecursive(t);
-            }
-
-            
-
-
+            return node; 
         }
 
-        public BSTNode FindRecursive(IComparable data)
-        {
-            return Root.Find(data);
-        }
-
-        
 
         public BSTNode Find(IComparable data){
             var node = Root;
@@ -238,45 +213,7 @@ namespace AaUS2Semka1.BinaryTree
         }
 
 
-        public bool Splay(IComparable data)
-        {
-            if (data == Root.Data) {
-                return false;
-            }
-            //BSTNode node = FindRecursive(data);
-            //Console.WriteLine(node);
-            var node = Find(data);
-            //Console.WriteLine(node);
-
-
-            //BSTNode node1 = null;
-            if (node != null)
-            {
-                if (node.Parent.Equals(Root))
-                {
-                    RightRotation(node.Parent);
-                }
-                else if (node.Parent.Parent.RightChild != null && node.Parent.Equals(node.Parent.Parent.RightChild))
-                {
-                    RightRotation(node.Parent);
-                    //ToStringAF();
-                    LeftRotation(node.Parent);
-                }
-                else if (node.Parent.Parent.LeftChild != null && node.Parent.Equals(node.Parent.Parent.LeftChild))
-                {
-                    RightRotation(node.Parent.Parent);
-                    RightRotation(node.Parent);
-                }
-
-
-
-
-
-            }
-
-            return false;
-
-        }
+        
 
         public bool RightRotation(BSTNode node)
         {
@@ -290,19 +227,25 @@ namespace AaUS2Semka1.BinaryTree
             {
 
                 node.LeftChild.Parent = null;
+
+               
                 //node1 = node.LeftChild;
 
             }
             else
             {
                 node.LeftChild.Parent = node.Parent;
-                if (node.Parent.LeftChild.Equals(node))
+                if (node.IsLeftChild())
                 {
                     node.Parent.LeftChild = node.LeftChild;
                 }
-                else
+                else if(node.IsRightChild())
                 {
                     node.Parent.RightChild = node.LeftChild;
+                }
+                else
+                {
+                    Console.WriteLine("hmnn to my nevychadza right rotation");
                 }
                 //Parent.LeftChild = LeftChild;
             }
@@ -315,7 +258,11 @@ namespace AaUS2Semka1.BinaryTree
             if (node.Parent == null)
             {
                 Root = node.LeftChild;
+                //node.Parent = Root;
+
             }
+
+            node.Parent = node.LeftChild;
             node.LeftChild = lssRs;
                 
 
@@ -326,7 +273,7 @@ namespace AaUS2Semka1.BinaryTree
 
         
 
-        private bool LeftRotation(BSTNode node)
+        public bool LeftRotation(BSTNode node)
         {
             if (node.RightChild == null)
             {
@@ -337,20 +284,27 @@ namespace AaUS2Semka1.BinaryTree
             {
 
                 node.RightChild.Parent = null;
+                //node.Parent = node.RightChild;
+
                 //node1 = node.LeftChild;
 
             }
             else
             {
                 node.RightChild.Parent = node.Parent;
-                if (node.Parent.RightChild.Equals(node))
+                if (node.IsRightChild())
                 {
                     node.Parent.RightChild = node.RightChild;
                 }
-                else
+                else if (node.IsLeftChild())
                 {
                     node.Parent.LeftChild = node.RightChild;
                 }
+                else
+                {
+                    Console.WriteLine("hmnn to my nevychadza lava rotacia");
+                }
+                
                 //Parent.LeftChild = LeftChild;
             }
             BSTNode lssRs = node.RightChild.LeftChild != null ? new BSTNode(node.RightChild.LeftChild) : null;
@@ -361,21 +315,16 @@ namespace AaUS2Semka1.BinaryTree
             if (node.Parent == null)
             {
                 Root = node.RightChild;
+                node.Parent = Root;
             }
             node.RightChild = lssRs;
 
             return true;
         }
 
-        internal bool Contains(IComparable data)
-        {
-            return Root.Contains(data);
-        }
+       
 
-        public string InOrderRecursive()
-        {
-            return Root.InOrder("");
-        }
+        
 
         /*public List<BSTNode> InOrderSuccessor()
         {
@@ -549,6 +498,49 @@ namespace AaUS2Semka1.BinaryTree
             return product;
         }
 
+        ///not using
+        ///
+        ///
+        ///
+        ///
+        ///
+        ///
+        /// not at all ;)
+        internal bool InsertRecursive(IComparable data)
+        {
+            if (Root != null) return Root.Insert(data);
+            Root = new BSTNode(data, null);
 
+            return true;
+
+
+        }
+
+        internal bool Contains(IComparable data)
+        {
+            return Root.Contains(data);
+        }
+
+        public void InsertRecursiveList(IComparable[] data)
+        {
+            //IComparable[] Data = new IComparable[] { 0, 2, 3 };
+            foreach (var t in data)
+            {
+                InsertRecursive(t);
+            }
+
+
+
+
+        }
+
+        public BSTNode FindRecursive(IComparable data)
+        {
+            return Root.Find(data);
+        }
+        public string InOrderRecursive()
+        {
+            return Root.InOrder("");
+        }
     }
 }

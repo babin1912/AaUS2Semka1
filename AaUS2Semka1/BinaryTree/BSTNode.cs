@@ -142,6 +142,25 @@ namespace AaUS2Semka1.BinaryTree
             return HasRightChild() && HasLeftChild() ? true : false;
         }
 
+        public bool IsRightChild()
+        {
+            if (Parent==null)
+            {
+                return false;
+            }
+            return Parent.RightChild != null && 
+                   Parent.RightChild.Equals(this);
+        }
+
+        public bool IsLeftChild()
+        {
+            if (Parent == null)
+            {
+                return false;
+            }
+            return Parent.LeftChild != null && Parent.LeftChild.Equals(this);
+        }
+
         public bool HasOnly1Child()
         {
             if ((HasRightChild()||HasLeftChild())&&!Has2Children())
