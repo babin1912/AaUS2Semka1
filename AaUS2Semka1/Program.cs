@@ -25,22 +25,38 @@ namespace AaUS2Semka1
 
             //tree.InsertRecursiveList(new IComparable[] {41,35,40,25,30,15,20,10 });
             tree.InsertRecursiveList(new IComparable[] {15,10,35,25,20,30,40});
-            tree.ToStringAF();
+
             //tree.RightRotation(35)
-            Console.WriteLine("ROOT" + tree.Root.HasGrandChild());
+            /*Console.WriteLine("ROOT" + tree.Root.HasGrandChild());
             Console.WriteLine("Leftson" + tree.Root.LeftChild.HasGrandChild());
-            Console.WriteLine("R son" + tree.Root.RightChild.HasGrandChild());
-            
-
-
-            tree.Splay(25);
-            Console.WriteLine("ROOT" + tree.Root.HasGrandChild());
-            Console.WriteLine("Leftson" + tree.Root.LeftChild.HasGrandChild());
-            Console.WriteLine("Rtson" + tree.Root.RightChild.HasGrandChild());
-
+            Console.WriteLine("R son" + tree.Root.RightChild.HasGrandChild());*/
 
             tree.ToStringAF();
-            //tree.delete(20);
+
+
+            //tree.Splay(25);
+            /*Console.WriteLine("ROOT" + tree.Root.HasGrandChild());
+            Console.WriteLine("Leftson" + tree.Root.LeftChild.HasGrandChild());
+            Console.WriteLine("Rtson" + tree.Root.RightChild.HasGrandChild());*/
+            tree.Delete(35);
+            tree.ToStringAF();
+            tree.Delete(10);
+            tree.ToStringAF();
+            tree.Delete(20);
+            /*Console.WriteLine(tree.Find(25).Has2Children());
+            Console.WriteLine(tree.Find(25).HasOnly1Child());
+            Console.WriteLine(tree.Find(35).Has2Children());
+            Console.WriteLine(tree.Find(35).HasOnly1Child());
+            Console.WriteLine(tree.Find(30).Has2Children());
+            Console.WriteLine(tree.Find(30).HasOnly1Child());*/
+            tree.ToStringAF();
+            //tree.Delete(25);
+            /*tree.ToStringAF();
+            tree.Delete(35);
+            tree.ToStringAF();*/
+
+            //tree.ToStringAF();
+            //tree.Delete(20);
             //tree.ToStringAF();
             //Console.WriteLine(tree.Contains(90));
 

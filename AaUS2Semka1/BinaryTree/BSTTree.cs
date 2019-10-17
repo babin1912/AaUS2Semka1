@@ -93,20 +93,89 @@ namespace AaUS2Semka1.BinaryTree
 
         }
 
-        public bool delete(IComparable data) {
+        public bool Delete(IComparable data) {
             BSTNode node = FindRecursive(data);
             if (node == null)
             {
                 return false;
             }
-            else if (node.HasNoChild())
+
+            if (node.HasNoChild())
             {
-                return node.Parent.RemoveChild(data);
-
+                if (node.Parent.LeftChild != null && node.Parent.LeftChild.Equals(node))
+                {
+                    node.Parent.LeftChild = null;
+                    node.Parent = null;
+                }
+                else
+                {
+                    node.Parent.LeftChild = null;
+                    node.Parent = null;
+                }
             }
-            else if(node.HasGrandChild()) {
+            else if (node.HasOnly1Child())
+            {
+                if (node.Parent.LeftChild != null && node.Parent.LeftChild.Equals(node))
+                {
+                    node.Parent.LeftChild = node.HasRightChild() ? node.RightChild : node.LeftChild;
+                    node.Parent.LeftChild.Parent = node.Parent;
+                    node.Parent = null;
+                }
+                else
+                {
+                    node.Parent.RightChild = !node.HasRightChild() ? node.RightChild : node.LeftChild;
+                    node.Parent.RightChild.Parent = node.Parent;
+                    node.Parent = null;
+                }
+            }
+            else if(node.Has2Children()) {
+                if (node.Parent == null)
+                {
+                    BSTNode n = node.InOrderSuccessor();
+                    Root.Data = n.Data;
+                    if (!Root.RightChild.Equals(n))
+                    {
+                        n.Parent.LeftChild = null;
+                    }
+                    else
+                    {
+                        Root.RightChild = null;
+                    }
 
-                  
+                    /*Root.Parent.LeftChild = null;
+                    Root.Parent = null;
+                    Root.RightChild = node.RightChild;*/
+                }
+                //else if (node.Parent.LeftChild != null && node.Parent.LeftChild.Equals(node))
+                else{
+                    BSTNode n = node.InOrderSuccessor();
+                    node.Data = n.Data;
+                    if (!node.RightChild.Equals(n))
+                    {
+                        n.Parent.LeftChild = null;
+                    }
+                    else
+                    {
+                        node.RightChild = null;
+                    }
+                    //n.Parent.LeftChild = null;
+                    /*node.Parent.LeftChild = node.InOrderSuccessor();
+                    node.Parent.LeftChild.Parent.LeftChild = null;
+                    node.Parent.LeftChild.Parent = node.Parent;
+
+                    node.Parent = null;*/
+                }
+                /*else
+                {
+                    BSTNode n = node.InOrderSuccessor();
+                    node.Data = n.Data;
+                    n.Parent.LeftChild = null;
+                    /*node.Parent.RightChild = node.InOrderSuccessor();
+                    node.Parent.RightChild.Parent.LeftChild = null;
+                    node.Parent.RightChild.Parent = node.Parent;
+                    node.Parent = null;#1#
+                }*/
+
             }
             return true; 
         }
@@ -142,15 +211,13 @@ namespace AaUS2Semka1.BinaryTree
                             //break;
                         
                     case 1:
-                        
-                            if (node.HasRightChild())
-	                        {
-                                node = node.RightChild;
-	                        } else {
-                                inProcess = false;
-                            }
-                            break;
-                        
+                        if (node.HasRightChild())
+	                    {
+                            node = node.RightChild;
+	                    } else {
+                            inProcess = false;
+                        }
+                        break;
                     case -1: {
                         {
                             if (node.HasLeftChild())
@@ -160,7 +227,7 @@ namespace AaUS2Semka1.BinaryTree
                                 inProcess = false;
                             }
                         }
-                            break;
+                        break;
                     }
 		            default: return null;
 	            }
@@ -310,7 +377,35 @@ namespace AaUS2Semka1.BinaryTree
             return Root.InOrder("");
         }
 
-        
+        /*public List<BSTNode> InOrderSuccessor()
+        {
+            var output = new List<BSTNode>();
+            BSTNode node = Root;
+            bool working = true;
+            do
+            {
+                if (node.LeftChild == null && node.RightChild == null)
+                {
+                    working = false;
+                }
+                else if (node.RightChild == null)
+                {
+                    //return 
+                    //return string.Concat(input, LeftChild.InOrder(input), Data.ToString(), " ");
+                }
+
+                if (node.LeftChild == null)
+                {
+                    //return string.Concat(input, Data.ToString(), RightChild.ToString(), " ");
+                }
+            } while (working);
+            
+
+
+
+            return null;
+
+        }*/
 
         public void ToStringAF()
         {

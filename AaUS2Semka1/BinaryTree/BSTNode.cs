@@ -106,12 +106,49 @@ namespace AaUS2Semka1.BinaryTree
 
         }
 
+        public BSTNode InOrderSuccessor()
+        {
+            var output = new List<BSTNode>();
+            BSTNode node = RightChild;
+            bool working = true;
+            do
+            {
+                if (node.LeftChild == null)
+                {
+                    working = false;
+                }
+                else
+                {
+                    node = node.LeftChild;
+                }
+
+                //return string.Concat(input, Data.ToString(), RightChild.ToString(), " ");
+                
+            } while (working);
+            return node;
+        }
+
         internal bool HasGrandChild()
         {
             if ((LeftChild !=null&&!LeftChild.HasNoChild())||(RightChild !=null &&!RightChild.HasNoChild()))
             {
                 return true;
             };
+            return false;
+        }
+
+        public bool Has2Children()
+        {
+            return HasRightChild() && HasLeftChild() ? true : false;
+        }
+
+        public bool HasOnly1Child()
+        {
+            if ((HasRightChild()||HasLeftChild())&&!Has2Children())
+            {
+                return true;
+            }
+
             return false;
         }
 
@@ -218,7 +255,7 @@ namespace AaUS2Semka1.BinaryTree
             return RightChild!=null;
         }
 
-        public IComparable Data { get; private set; }
+        public IComparable Data { get; set; }
 
 
         public bool IsNull { get; }
