@@ -25,7 +25,7 @@ namespace AaUS2Semka1
 
             //tree.InsertRecursiveList(new IComparable[] {41,35,40,25,30,15,20,10 });
             tree.InsertList(new IComparable[] {15,10,35,25,20,30,40});
-
+            tree.Delete(10);
             //tree.RightRotation(35);
             /*Console.WriteLine("ROOT" + tree.Root.HasGrandChild());
             Console.WriteLine("Leftson" + tree.Root.LeftChild.HasGrandChild());

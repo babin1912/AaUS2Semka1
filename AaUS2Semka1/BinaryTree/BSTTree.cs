@@ -270,10 +270,11 @@ namespace AaUS2Semka1.BinaryTree
 
             
             node.LeftChild = lssRs;
+            //lssRs.Parent = node;
 
                 
 
-            
+            ToStringAF();
             
             return true;
         }
@@ -322,14 +323,16 @@ namespace AaUS2Semka1.BinaryTree
             if (node.Parent == null)
             {
                 Root = node.RightChild;
-                node.Parent = Root;
+                //node.Parent = Root;
             }
-            node.RightChild = lssRs;
+            node.Parent = node.RightChild;
+            //node.RightChild = lssRs;
             if (lssRs != null)
             {
                 lssRs.Parent = node;
             }
-
+            node.RightChild = lssRs;
+            ToStringAF();
 
             return true;
         }

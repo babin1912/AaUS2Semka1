@@ -24,8 +24,13 @@ namespace AaUS2Semka1.BinaryTree
 
             
             ToStringAF();
-            Console.WriteLine("insert");
-            Splay(output);
+            Console.WriteLine("insert" + data);
+            Console.WriteLine();
+            while (!bt.Root.Data.Equals(data))
+            {
+                Splay(output);
+
+            }
             
 
 
@@ -39,7 +44,7 @@ namespace AaUS2Semka1.BinaryTree
             //Console.WriteLine(node);
             //var node = bt.Find(data);
             //Console.WriteLine(node);
-
+            
 
             //BSTNode node1 = null;
             if (node != null && !node.Equals(bt.Root))
@@ -99,23 +104,34 @@ namespace AaUS2Semka1.BinaryTree
 
         public void ToStringAF()
         {
-            Console.Clear();
+            //Console.Clear();
             bt.ToStringAF();
         }
 
         public BSTNode Delete(IComparable data)
         {
-            return Splay(bt.Delete(data).Parent);
+            Console.Clear();
+            Console.WriteLine("delete"+data);
+            ToStringAF();
+            BSTNode node = bt.Delete(data).Parent;
+            while (!bt.Root.Equals(data))
+            {
+                Splay(node);
+            }
+            
+            ToStringAF();
+            return node;
         }
 
         public void InsertList(IComparable[] comparables)
         {
             foreach (var item in comparables)
             {
+                Console.Clear();
                 Insert(item);
-                
-                ToStringAF();
+                //ToStringAF();
                 Console.WriteLine("splay");
+                Console.ReadLine();
                 Console.WriteLine();
             }
         }
