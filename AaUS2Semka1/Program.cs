@@ -7,8 +7,8 @@ namespace AaUS2Semka1
     {
         private static void Main(string[] args)
         {
-            var tree = new SplayTree();
-            BSTTree treeR = new BSTTree();
+            //var tree = new SplayTree();
+            //BSTTree treeR = new BSTTree();
             //var peter = new IComparable[]{0, 2, 3};
             //tree.InsertList(new IComparable[] { 3, 9, 20, 15, 7 });
 
@@ -20,12 +20,12 @@ namespace AaUS2Semka1
             //Console.WriteLine(" " + treeR.InOrder());
 
 
-           
+
             //treeR.ToStringAF();
 
             //tree.InsertRecursiveList(new IComparable[] {41,35,40,25,30,15,20,10 });
-            tree.InsertList(new IComparable[] {15,10,35,25,20,30,40});
-            tree.Delete(10);
+            //tree.InsertList(new IComparable[] { 15, 10, 35, 25, 20, 30, 40 });
+            //tree.Delete(10);
             //tree.RightRotation(35);
             /*Console.WriteLine("ROOT" + tree.Root.HasGrandChild());
             Console.WriteLine("Leftson" + tree.Root.LeftChild.HasGrandChild());
@@ -62,6 +62,19 @@ namespace AaUS2Semka1
             //Console.WriteLine(tree.Contains(90));
 
             //Console.WriteLine(jozef);
+
+            Tester t = new Tester();
+            t.GenerateArray();
+            t.AddToTreeRND();
+            t.ToStringAF();
         }
+
+        public static void test(BSTTree stromek)
+        {
+            
+            
+        }
+
+
     }
 }

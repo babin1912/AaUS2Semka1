@@ -43,6 +43,7 @@ namespace AaUS2Semka1.BinaryTree
         public BSTNode(IComparable data, BSTNode parent)
         {
             Parent = parent;
+            
             this.Data = data;
         }
 
@@ -99,6 +100,8 @@ namespace AaUS2Semka1.BinaryTree
             return true;
         }
 
+        
+
         public bool RightRotation()
         {
 
@@ -148,8 +151,7 @@ namespace AaUS2Semka1.BinaryTree
             {
                 return false;
             }
-            return Parent.RightChild != null && 
-                   Parent.RightChild.Equals(this);
+            return (Parent.RightChild != null && Parent.RightChild.Equals(this));
         }
 
         public bool IsLeftChild()
@@ -158,7 +160,7 @@ namespace AaUS2Semka1.BinaryTree
             {
                 return false;
             }
-            return Parent.LeftChild != null && Parent.LeftChild.Equals(this);
+            return (Parent.LeftChild != null && Parent.LeftChild.Equals(this));
         }
 
         public bool HasOnly1Child()
@@ -241,6 +243,35 @@ namespace AaUS2Semka1.BinaryTree
         {
             return Data.ToString();
         }
+
+        
+
+        /*protected bool Equals(BSTNode other)
+        {
+            if
+            
+            return Equals(Parent.Data, other.Parent.Data) && Equals(LeftChild.Data, other.LeftChild.Data) && Equals(RightChild.Data, other.RightChild.Data) && Equals(Data, other.Data);
+        }*/
+
+        /*public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((BSTNode) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (Parent != null ? Parent.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (LeftChild != null ? LeftChild.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (RightChild != null ? RightChild.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Data != null ? Data.GetHashCode() : 0);
+                return hashCode;
+            }
+        }*/
 
         public string InOrder(string input)
         {

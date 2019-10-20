@@ -23,7 +23,7 @@ namespace AaUS2Semka1.BinaryTree
 
             if (Equals(Root.Data, data))
             {
-                return null;
+                return Root;
             }
             
 
@@ -45,6 +45,10 @@ namespace AaUS2Semka1.BinaryTree
                     else
                     {
                         node.LeftChild = new BSTNode(data,node);
+                        if (!node.LeftChild.Parent.Equals(node))
+                        {
+                            Console.WriteLine("nahovno insert");
+                        }
                         return node.LeftChild;
                     }
                 }
@@ -57,7 +61,10 @@ namespace AaUS2Semka1.BinaryTree
                     else
                     {
                         node.RightChild = new BSTNode(data,node);
-                        
+                        if (!node.RightChild.Parent.Equals(node))
+                        {
+                            Console.WriteLine("nahovno insert");
+                        }
                         return node.RightChild;
                     }
                 }
@@ -215,13 +222,24 @@ namespace AaUS2Semka1.BinaryTree
 
         
 
-        public bool RightRotation(BSTNode node)
+        public BSTNode RightRotation(BSTNode node)
         {
-            
+            if (node.Data.Equals(22))
+            {
+                Console.WriteLine();
+            }
+            Console.WriteLine("rr" + node);
+            //node.LeftChild.Parent = node;
+            if (!node.LeftChild.Parent.Equals(node))
+            {
+                Console.WriteLine("cyhka");
+            }
+
             if (node.LeftChild == null)
             {
-                return false;
+                return node;
             }
+            BSTNode lssRs = node.LeftChild.RightChild != null ? new BSTNode(node.LeftChild.RightChild) : null;
 
             if (node.Parent == null)
             {
@@ -245,13 +263,14 @@ namespace AaUS2Semka1.BinaryTree
                 }
                 else
                 {
+                    ToStringAF();
+                    
                     Console.WriteLine("hmnn to my nevychadza right rotation");
                 }
                 //Parent.LeftChild = LeftChild;
             }
 
             
-            BSTNode lssRs = node.LeftChild.RightChild!=null? new BSTNode(node.LeftChild.RightChild):null;
             node.LeftChild.RightChild = node;
             //this = LeftChild;
             
@@ -272,21 +291,40 @@ namespace AaUS2Semka1.BinaryTree
             node.LeftChild = lssRs;
             //lssRs.Parent = node;
 
-                
 
-            ToStringAF();
-            
-            return true;
+            //ToStringAF();
+            if (node.LeftChild != null && !node.LeftChild.Parent.Equals(node) || node.RightChild != null && !node.RightChild.Parent.Equals(node))
+            {
+                Console.WriteLine("cyka");
+            }
+            else if (node.Parent != null && !node.Equals(node.Parent.RightChild))
+            {
+                Console.WriteLine("cyka");
+            }
+
+            return node;
         }
 
         
 
-        public bool LeftRotation(BSTNode node)
+        public BSTNode LeftRotation(BSTNode node)
         {
+            Console.WriteLine("ll"+node);
+            if (node.Data.Equals(6))
+            {
+                Console.WriteLine();
+            }
+            //node = node.RightChild.Parent;
+            if (!node.RightChild.Parent.Equals(node))
+            {
+                Console.WriteLine("cyhka");
+            }
+            //Console.WriteLine(node.Data);
             if (node.RightChild == null)
             {
-                return false;
+                return node;
             }
+            BSTNode lssRs = node.RightChild.LeftChild != null ? new BSTNode(node.RightChild.LeftChild) : null;
 
             if (node.Parent == null)
             {
@@ -315,7 +353,6 @@ namespace AaUS2Semka1.BinaryTree
                 
                 //Parent.LeftChild = LeftChild;
             }
-            BSTNode lssRs = node.RightChild.LeftChild != null ? new BSTNode(node.RightChild.LeftChild) : null;
             node.RightChild.LeftChild = node;
 
             //this = LeftChild;
@@ -323,7 +360,7 @@ namespace AaUS2Semka1.BinaryTree
             if (node.Parent == null)
             {
                 Root = node.RightChild;
-                //node.Parent = Root;
+                node.Parent = Root;
             }
             node.Parent = node.RightChild;
             //node.RightChild = lssRs;
@@ -332,9 +369,20 @@ namespace AaUS2Semka1.BinaryTree
                 lssRs.Parent = node;
             }
             node.RightChild = lssRs;
-            ToStringAF();
+            //ToStringAF();
 
-            return true;
+            if (node.RightChild != null && !node.RightChild.Parent.Equals(node) || node.LeftChild != null && !node.LeftChild.Parent.Equals(node))
+            {
+                Console.WriteLine("cyka");
+            }
+            else if (node.Parent!= null && !node.Equals(node.Parent.LeftChild))
+            {
+                Console.WriteLine(node.ToString());
+                Console.WriteLine("cyka");
+            }
+
+
+            return node;
         }
 
        
